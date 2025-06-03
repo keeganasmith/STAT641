@@ -5,6 +5,9 @@
 \usepackage{xcolor}   
 \usepackage{amsmath}
 \usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{verbatim}
 
 % Define macros for title and author
 \newcommand{\thetitle}{STAT 641 \\ Homework 1}
@@ -69,12 +72,14 @@ This would be fixed by randomly applying the thicknesses.\\
 \item Experimental, Comparative. The response variable is plant growth, the explanatory variable is the light condition. \\
 \item Observational, Descriptive.
 \end{enumerate}
+\section*{2.2}
 \begin{enumerate}
 \item Observational, Descriptive. \\
 \item Experimental, Comparative. The response variables are crop yield and pest population and the explanatory variable is pesticide type. \\
 \item Observational, Comparative. The response variable is income and the explanatory variable is level of education. \\
 \item Experimental, Comparative. The response variable is memory recall, the explanatory variable is type of music.
 \end{enumerate}
+\section*{2.3}
 \begin{enumerate}
 \item Experimental, Comparative. The response variable is test score, the explanatory variable is time slept. \\
 \item Experimental, Comparative. The response variable is brand preference, the explanatory variable is taste. \\
@@ -88,11 +93,94 @@ This would be fixed by randomly applying the thicknesses.\\
 \item This is a systematic sampling \\
 \item This is a stratified, multi-stage cluster sample \\
 \end{enumerate}
+\section*{3.2}
 \begin{enumerate}
 \item This is a stratified, multi-stage cluster sample \\
 \item This is a systematic, multi-stage cluster sample \\
 \item This is a stratified, systematic sample \\
+\item This is a stratified, single-stage cluster sample \\
+\end{enumerate}
+\section*{Question Group 4}
+\begin{enumerate}
+\item Retrospective study, comparative. The response variable is the change in transportation usage, the explanatory variable is the new subway line. \\
+\item Prospective study, comparative. The response variable is survival rate, the explanatory variable is treatment type. \\
+\item Survey, descriptive. \\
+\item Survey, descriptive. \\
+\end{enumerate}
+\section*{4.2}
+\begin{enumerate}
+\item Retrospective study, comparative. The response variable is sleep quality, the explanatory variable is diet. \\
+\item Prospective study, descriptive. 
+\item Retrospective study, descriptive. \\
+\item Retrospective study, comparative. The response variable is test scores, the explanatory variable is curriculum. \\
+\end{enumerate}
+\section*{Question Group 5}
+\begin{enumerate}
+\item "fert A mean height: "
+46.5 \\
+"fert A mean tomatoes: " 
+4.75 \\
+"fert B mean height: "
+41.5 \\
+"fert B mean tomatoes: "
+8.25 \\
+"fert C mean height: "
+51.625 \\
+"fert C mean tomatoes: "
+2 \\
+\item Fertilizer C seems to be the best for increasing plant height. Fertilizer B seems to be the best for increasing the number of tomatoes. \\
+\item Despite C having the best average height, it has the worst average number of tomatoes. Despite B having the best average number of tomatoes, it has the worst plant height. It seems that A is the sweet spot with its average height and number of tomatoes being second best of the fertilizers. \\
+\item The weather is a confounding variable that could have affected the effectiveness of the fertilizers. Maybe some of the fertilizers do better or worse depending on the weather. This could be prevented by growing the plants indoors. \\
+\item Graph: \\
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.7\textwidth]{Rplots-1.png}
+  \label{fig:height_vs_tomatoes}
+\end{figure}
+\newpage
+\item From the graph, you can see a vague inverse linear relationship between number of tomatoes and height. In general, as the height of the plant increases, the number of tomatoes decreases. We can also very clearly see that the fertilizers are very polarized with A, B, and C having few overlapping height and number of tomatoes values. \\
 \item 
+\begin{verbatim}
+df <- read.csv("data.csv",
+                header = TRUE, sep = ",")
+head(df)
+
+fert_A_df = df[df$Fertilizer == "A", ] 
+print("fert A mean height: ")
+mean(fert_A_df[["Height_cm"]])
+print("fert A mean tomatoes: ")
+mean(fert_A_df[["Number_of_Tomatoes"]])
+
+fert_B_df = df[df$Fertilizer == "B", ] 
+print("fert B mean height: ")
+mean(fert_B_df[["Height_cm"]])
+print("fert B mean tomatoes: ")
+mean(fert_B_df[["Number_of_Tomatoes"]])
+
+fert_C_df = df[df$Fertilizer == "C", ] 
+print("fert C mean height: ")
+mean(fert_C_df[["Height_cm"]])
+print("fert C mean tomatoes: ")
+mean(fert_C_df[["Number_of_Tomatoes"]])
+
+#create the plot for height vs num tomatoes
+plot(fert_A_df$Height_cm, fert_A_df$Number_of_Tomatoes,
+     main = "Height vs Number of Tomatoes by Fertilizer",
+     xlab = "Height (cm)", ylab = "Number of Tomatoes",
+     pch = 19, col = "red", xlim = range(df$Height_cm),
+     ylim = range(df$Number_of_Tomatoes))
+
+#add fertilizers b and c to the plot with different colors
+points(fert_B_df$Height_cm, fert_B_df$Number_of_Tomatoes, pch = 19, col = "green")
+points(fert_C_df$Height_cm, fert_C_df$Number_of_Tomatoes, pch = 19, col = "blue")
+
+#add a legend to the plot with the appropriate color fertilizer mapping
+legend("topright",
+       legend = c("Fertilizer A", "Fertilizer B", "Fertilizer C"),
+       col = c("red", "green", "blue"),
+       pch = 19)
+\end{verbatim}
+
 \end{enumerate}
 \end{document}
 
