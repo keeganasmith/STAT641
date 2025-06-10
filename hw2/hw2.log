@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.4.27)  9 JUN 2025 23:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.4.27)  9 JUN 2025 23:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -436,6 +436,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 213--215
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 227--228
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 230--232
+
+ []
+
+
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 22.43335pt, for example:
 (fancyhdr)                \setlength{\headheight}{22.43335pt}.
@@ -443,7 +453,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
 
-[6] (./hw2.aux)
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 244--245
+
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.43335pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.43335pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
+
+[7] (./hw2.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -469,10 +492,10 @@ msfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on hw2.pdf (6 pages, 150051 bytes).
+Output written on hw2.pdf (7 pages, 152411 bytes).
 PDF statistics:
- 88 PDF objects out of 1000 (max. 8388607)
- 53 compressed objects within 1 object stream
+ 93 PDF objects out of 1000 (max. 8388607)
+ 57 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

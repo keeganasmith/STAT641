@@ -226,8 +226,23 @@ P(Y \geq 3) &= 1 - P(Y \leq 2) \\
 \begin{enumerate}
 \item The cdf for an exponential distribution with mean wait time of 10 minutes is given by: \\
 \[
-F(t) = 1 - e^{-\lambda \cdot t}
+F(t) = 1 - e^{-\frac{1}{10} \cdot t}
 \]
-
+So we have: \\
+\begin{align*}
+F(5) &= 1 - e^{-\frac{1}{10} \cdot 5} \\
+&= 1 - e^{-\frac{1}{2}} \\
+&\approx 0.3935
+\end{align*}
+\item The probability that time is greater than 15 is $1 - F(15)$
+\begin{align*}
+1 - F(15) &= 1 - (1 - e^{-\frac{1}{10} \cdot 15}) \\
+&= 1 - (1 - e^{-\frac{3}{2}}) \\
+&= e^{-\frac{3}{2}} \\
+&\approx 0.2231
+\end{align*}
+\item The probability that a call will occur in the next 5 minutes is 0.3935 since the amount of time between events does not depend on the amount of time that has passed. \\
 \end{enumerate}
+\section*{Problem 3}
+
 \end{document}
