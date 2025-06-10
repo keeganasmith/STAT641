@@ -48,13 +48,186 @@
 \section*{Question Group 1}
 \section*{1.1}
 \begin{enumerate}
-The cumulative distribution function $F(z)$ can be given by: \\
+\item The cumulative distribution function $F(z)$ can be given by: \\
 \[
 F(z) = \int_{-\infty}^zf(x)dx
 \]
 Thus we have: \\
 \begin{align*}
-F(z) &= \int_{-\infty}^0 + \int_{0}^{\infty} \\
+F(z) &= \int_{-\infty}^0f(x)dx + \int_{0}^{z}f(x)dx \\
+F(z) &= 0 + \int_{0}^{z}\lambda \cdot e^{-\lambda \cdot x}dx \\
+F(z) &= (-e^{-\lambda \cdot x})_0^z \\
+F(z) &= -e^{-\lambda \cdot z} + 1
 \end{align*}
+\item Given $F(z)$ from the above: \\
+\begin{align*}
+F(z) &= 0.5 \\
+-e^{-\lambda \cdot z} + 1 &= .5 \\
+-e^{-\lambda \cdot z} &= -.5 \\
+-\lambda \cdot z &= \ln(.5) \\
+z &= -\frac{\ln(.5)}{\lambda}
+\end{align*}
+\end{enumerate}
+\section*{1.2}
+\begin{enumerate}
+\item The z stat for 60 is: \\
+\begin{align*}
+z &= \frac{60 - 50}{10} \\
+z &= 1 \\
+\end{align*}
+Using a calculator, the cdf of z is .8413
+\item we are trying to find the value such that cdf($z$) = .95 where $z$ is the z statistic: \\
+\begin{align*}
+cdf(z) &= .95 \\
+z &= icdf(.95) \\
+\frac{x - \mu}{\sigma} &= icdf(.95) \\
+x &= icdf(.95) \cdot \sigma + \mu \\
+x &\approx 66.4485
+\end{align*} 
+\end{enumerate}
+\section*{Question Group 2}
+\section*{2.1}
+\begin{enumerate}
+\item $\mu$ is a location variable if: \\
+\[
+f_W(w) = f_Y(w + \mu)
+\]
+does not depend on $\mu$ where $W = Y - \mu$. \\
+For $\xi \neq 0$ we have: \\
+\begin{align*}
+f_W(w) &= f_Y(w + \mu) \\
+&= \frac{1}{\sigma} \cdot (1 + \xi \cdot \frac{(z + \mu) - \mu}{\sigma})^{-1 - \frac{1}{\xi}}\mbox{exp}(-(1 + \xi \cdot \frac{(z + \mu) - \mu}{\sigma})^{-\frac{1}{\xi}}) \\
+&= \frac{1}{\sigma} \cdot (1 + \xi \cdot \frac{z}{\sigma})^{-1 - \frac{1}{\xi}}\mbox{exp}(-(1 + \xi \cdot \frac{z}{\sigma})^{-\frac{1}{\xi}}) \\
+\end{align*}
+The pdf of $f_W(w)$ does not depend on $\mu$ so $\mu$ is a location variable when $\xi \neq 0$ \\
+For $\xi = 0$ we have: \\
+\begin{align*}
+f_W(w) &= f_Y(w + \mu) \\
+&= \frac{1}{\sigma} \cdot \mbox{exp}(-\frac{(z + \mu) - \mu}{\sigma})\mbox{exp}(\mbox{-exp}(-\frac{(z + \mu) - \mu}{\sigma})) \\
+&= \frac{1}{\sigma} \cdot \mbox{exp}(-\frac{z}{\sigma})\mbox{exp}(\mbox{-exp}(-\frac{z}{\sigma}))
+\end{align*}
+again the pdf of $f_W(w)$ does not depend on $\mu$ so $\mu$ is a location variable when $\xi = 0$. Therefore $\mu$ is a location variable. \\
+$\sigma$ is a scaling variable if: \\
+\[
+f_W(w) = \sigma \cdot f_Y(\sigma w)
+\]
+does not depend on $\sigma$ where $W = \frac{Y}{\sigma}$. \\
+Since $\mu$ is a location variable, let $Y = Z - \mu$ \\
+For $\xi \neq 0$ we have: \\
+\begin{align*}
+f_W(w) &= \sigma \cdot f_Y(\sigma w) \\
+&= \sigma \cdot \frac{1}{\sigma} \cdot (1 + \xi \cdot \frac{y \cdot \sigma}{\sigma})^{-1 - \frac{1}{\xi}}\mbox{exp}(-(1 + \xi \cdot \frac{y \cdot \sigma}{\sigma})^{-\frac{1}{\xi}}) \\
+&= (1 + \xi \cdot y)^{-1 - \frac{1}{\xi}}\mbox{exp}(-(1 + \xi \cdot y)^{-\frac{1}{\xi}}) \\
+\end{align*}
+The final function does not depend on $\sigma$ so $\sigma$ is a scaling variable when $\xi \neq 0$ \\
+For $\xi = 0$ we have: \\
+\begin{align*}
+f_W(w) &= \sigma \cdot f_Y(\sigma w) \\
+&= \sigma \cdot \frac{1}{\sigma} \cdot \mbox{exp}(-\frac{y \cdot \sigma}{\sigma})\mbox{exp}(\mbox{-exp}(-\frac{y \cdot \sigma}{\sigma})) \\
+&= \mbox{exp}(-y)\mbox{exp}(\mbox{-exp}(-y))
+\end{align*}
+The final function does not depend on $\sigma$ so $\sigma$ is a scaling variable for $\xi = 0$. $\sigma$ is a scaling variable both when $\xi = 0$ and $\xi \neq 0$ so $\sigma$ is a scaling variable for the family. \\
+\item The quantile function is simply the inverse of the cdf: \\
+\[
+Q(p) = F^{-1}(p)
+\]
+Thus we have: \\
+\begin{align*}
+p &= \mbox{exp}(-(1 + \xi(\frac{z - \mu}{\sigma}))^{-\frac{1}{\xi}}) \\
+\ln(p) &= -(1 + \xi(\frac{z - \mu}{\sigma}))^{-\frac{1}{\xi}} \\
+(-\ln(p))^{-\xi} &= 1 + \xi(\frac{z - \mu}{\sigma}) \\
+(-\ln(p))^{-\xi} - 1 &= \xi(\frac{z - \mu}{\sigma}) \\
+\frac{(-\ln(p))^{-\xi} - 1}{\xi} \cdot \sigma &= z - \mu \\
+z &= \frac{(-\ln(p))^{-\xi} - 1}{\xi} \cdot \sigma + \mu
+\end{align*}
+Thus the quantile function for $\xi \neq 0$ is: \\
+\[
+Q(p) = \frac{(-\ln(p))^{-\xi} - 1}{\xi} \cdot \sigma + \mu
+\]
+for when $\xi = 0$: \\
+\begin{align*}
+p &= \mbox{exp}(-\mbox{exp}(-\frac{z - \mu}{\sigma})) \\
+\ln(p) &= -\mbox{exp}(-\frac{z - \mu}{\sigma}) \\
+\ln(-\ln(p)) &= -\frac{z - \mu}{\sigma} \\
+-\sigma \cdot \ln(-\ln(p)) + \mu &= z \\
+\end{align*}
+Thus the quantile function for $\xi = 0$ is: \\
+\[
+Q(p) = -\sigma \cdot \ln(-\ln(p)) + \mu
+\]
+\item The probability that a value is greater than $x$ is given by: \\
+\[
+P(X > x) = 1 - F(x)
+\]
+Thus we have: \\
+\begin{align*}
+P(X > 12) &= 1 - F(12) \\
+&= 1 - \mbox{exp}(-(1 + \frac{1}{2} \cdot \frac{12 - 10}{2})^{-\frac{1}{\frac{1}{2}}}) \\
+&\approx .3588 \\
+\end{align*}
+\item We simply need to evaluate $Q(.25)$: \\
+\begin{align*}
+Q(.25) &= \frac{(-\ln(.25))^{-\frac{1}{2}} - 1}{\frac{1}{2}} \cdot 2 + 10 \\
+&\approx 9.397
+\end{align*}
+\end{enumerate}
+\section*{2.2}
+\begin{enumerate}
+\item $\beta$ acts as a scaling parameter if: \\
+\[
+f_W(w) = \beta \cdot f_Y(\beta w)
+\]
+does not depend on $\beta$ where $W = \frac{Y}{\beta}$. \\
+Thus we have: \\
+\begin{align*}
+f_W(w) &= \beta \cdot \frac{1}{\beta^{\alpha}\Gamma(\alpha)}(y \cdot \beta)^{\alpha - 1} \cdot e^{\frac{-\beta \cdot y}{\beta}} \\
+f_W(w) &= \beta \cdot \frac{1}{\beta \cdot \Gamma(\alpha)}y^{\alpha - 1}\cdot e^{-y} \\
+f_W(w) &= \frac{1}{\Gamma(\alpha)}y^{\alpha - 1}\cdot e^{-y} \\
+\end{align*}
+The final function doesn't rely on $\beta$ so $\beta$ is a scaling variable for $y \geq 0$. The case for $y < 0$ is trivial since the pdf is just 0. So $\beta$ is a scaling variable for this family. \\
+\item We now have: \\
+\[
+f(y) = \frac{1}{\frac{1}{\theta}^{\alpha}\Gamma(\alpha)}(y)^{\alpha - 1} \cdot e^{\frac{-y}{\frac{1}{\theta}}} 
+\]
+Instead of using $W = \frac{Y}{\theta}$, we will use $W = \frac{Y}{\theta^{-1}}$: \\
+\begin{align*}
+f_W(w) &= \frac{1}{\theta} \cdot \frac{1}{\frac{1}{\theta}^{\alpha}\Gamma(\alpha)}(y \cdot \theta^{-1})^{\alpha - 1} \cdot e^{\frac{-(y \cdot \theta^{-1})}{\frac{1}{\theta}}} \\
+f_W(w) &= \frac{1}{\theta} \cdot \frac{1}{(\theta^{-1})\Gamma(\alpha)}(y^{\alpha - 1}) \cdot e^{-y} \\
+f_W(w) &= \frac{1}{\Gamma(\alpha)}(y^{\alpha - 1}) \cdot e^{-y} \\
+\end{align*}
+The final function doesn't depend on $\theta$ so $\theta$ is a sclaing variable (again $y < 0$ is trivial). 
+\end{enumerate}
+\section*{2.3}
+\begin{enumerate}
+\item Assuming the call rate follows a Poisson distribution with $\lambda = 12$ then we have: \\
+\[
+P(Y = y) = \frac{e^{-12} \cdot 12^y}{y!}
+\]
+\begin{align*}
+P(Y \geq 3) &= 1 - P(Y \leq 2) \\
+&= 1 - P(Y = 0) - P(Y = 1) - P(Y = 2) \\
+&= 1 - e^{-12} - 12e^{-12} - 72e^{-12} \\
+&= 1 - 85 \cdot e^{-12} \\
+&= 0.9995 \\
+\end{align*}
+\item Since the rate of calls is constant, the distribution for the calls in a week also follows a poisson distribution with $\lambda = 12 \cdot 7 = 84$ \\
+Thus we have: \\
+\[
+P(Y = y) = \frac{e^{-84} \cdot 84^y}{y!}
+\]
+\begin{align*}
+P(Y \geq 3) &= 1 - P(Y \leq 2) \\
+&= 1 - P(Y = 0) - P(Y = 1) - P(Y = 2) \\
+&= 1 - e^{-84} - 84e^{-84} - 3528e^{-84} \\
+&\approx 1.0000 \\
+\end{align*}
+\end{enumerate}
+\section*{2.4}
+\begin{enumerate}
+\item The cdf for an exponential distribution with mean wait time of 10 minutes is given by: \\
+\[
+F(t) = 1 - e^{-\lambda \cdot t}
+\]
+
 \end{enumerate}
 \end{document}
