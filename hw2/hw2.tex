@@ -10,7 +10,7 @@
 \usepackage{verbatim}
 
 % Define macros for title and author
-\newcommand{\thetitle}{STAT 641 \\ Homework 1}
+\newcommand{\thetitle}{STAT 641 \\ Homework 2}
 \newcommand{\theauthor}{Keegan Smith}
 
 \title{\thetitle}
@@ -247,9 +247,85 @@ F(5) &= 1 - e^{-\frac{1}{10} \cdot 5} \\
 \section*{3.1}
 \begin{enumerate}
 \item This is an exponential ($\beta$) distribution \\
-\item This is a gamma distribution with parameters \\
+\item This is a gamma distribution with parameters ($\alpha_2 + \alpha_3 + \alpha_4$, $\beta$)\\
 \item This is a gamma distribution with parameters ($\alpha_5$, $5 \cdot \beta_5$) \\
 \item This is a chi-squared distribution with parameter $v = 2 \cdot \alpha_6$ \\
 \item This is a maxwell distribution \\
+\end{enumerate}
+\section*{3.2}
+\begin{enumerate}
+\item the exponential cdf is: \\
+\[
+1 - e^{-\lambda \cdot y}
+\]
+In this case $\lambda = 2$. \\
+Thus we have: \\
+\begin{align*}
+.48 &= 1 - e^{-\lambda \cdot y} \\
+.52 &= e^{-\lambda \cdot y} \\
+\ln(.52) &= -\lambda \cdot y \\
+y &= \frac{-\ln(.52)}{2} \\
+&= 0.3269
+\end{align*}
+\item The cdf for geometric distribution is:\\
+\[
+1 - (1 - p)^{i}
+\]
+where $p=.5$ in our case:\\
+\begin{align*}
+.48 &= 1 - (1 - p)^{i} \\
+.52 &= (1 - p)^i \\
+\log_{.5}.52 &= i\\
+i &= 0.9434
+\end{align*}
+\item I refuse to do this by hand. Here is the python code using scipy: \\
+\begin{verbatim}
+import numpy as np
+from scipy.stats import binom
+value = .48
+n = 15
+p = .6
+i = 0
+total_prob = 0
+while(True):
+    total_prob += binom.pmf(i, n, p)
+    if total_prob >= value:
+        print("result: ", i)
+        break;
+    i += 1
+\end{verbatim}
+The result is 9 \\
+\item Again: \\
+\begin{verbatim}
+total_prob = 0
+i = 0
+while(True):
+  total_prob += poisson.pmf(i, 4)
+  if(total_prob >= value):
+      print("result: ", i)
+      break;
+  i += 1
+\end{verbatim}
+The result is 4. \\
+\item For uniform (5, 10) This should simply be $5 + 5 \cdot .48 = 7.4$
+\end{enumerate}
+\section*{question group 4}
+\begin{enumerate}
+\item binomial \\
+\item exponential \\
+\item poisson \\
+\item geometric \\
+\item binomial \\
+\item gamma \\
+\item exponential \\
+\item lognormal \\
+\item poisson \\
+\item lognormal \\
+\item normal \\
+\item hypergeometric \\
+\item weibull \\
+\item lognormal \\
+\item gamma \\
+\item poisson
 \end{enumerate}
 \end{document}
