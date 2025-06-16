@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{lipsum}  
+\usepackage{listings} 
+\usepackage{xcolor}   
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{verbatim}
+
+% Define macros for title and author
+\newcommand{\thetitle}{STAT 641 \\ Homework 4}
+\newcommand{\theauthor}{Keegan Smith}
+
+\title{\thetitle}
+\author{\theauthor}
+
+\pagestyle{fancy}
+\fancyhf{}  % Clear all header and footer fields
+\fancyhead[L]{\nouppercase{\rightmark}}
+\fancyhead[C]{\thetitle}  % Title in the center
+\fancyhead[R]{\theauthor}  % Your name on the right
+
+\lstset{ %
+  backgroundcolor=\color{lightgray},   % choose the background color
+  basicstyle=\ttfamily\small,          % size of fonts used for the code
+  keywordstyle=\color{blue},           % color for keywords
+  commentstyle=\color{green},          % color for comments
+  stringstyle=\color{red},             % color for strings
+  numbers=left,                        % where to put the line-numbers
+  numberstyle=\tiny\color{gray},       % style for line-numbers
+  stepnumber=1,                        % the step between two line-numbers
+  numbersep=5pt,                       % how far the line-numbers are from the code
+  frame=single,                        % adds a frame around the code
+  rulecolor=\color{black},             % frame color
+  breaklines=true,                     % automatic line breaking
+  breakatwhitespace=false,             % automatic breaks should only happen at whitespace
+  showspaces=false,                    % don't show spaces in the code
+  showstringspaces=false,              % don't show spaces in strings
+  showtabs=false,                      % don't show tabs in the code
+}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question Group 1}
+\section*{1.1}
+\begin{enumerate}
+\item The CDF of Weibull: \\
+\begin{align*}
+F(z) &= \int_0^{z}\frac{k}{\lambda} (\frac{x}{\lambda})^{k-1}e^{-(\frac{x}{\lambda})^k} dx\\
+\end{align*}
+using u substitution where: 
+\begin{align*}
+u &= (\frac{x}{\lambda})^k \\
+du &= k \cdot (\frac{x}{\lambda})^{k-1}dx \\
+dx &= \frac{du}{k \cdot (\frac{x}{\lambda})^{k-1}} \\
+\end{align*}
+Thus we have: \\
+\begin{align*}
+F(z) &= \int_0^{(\frac{z}{\lambda})^k}\frac{k}{\lambda} (\frac{x}{\lambda})^{k-1}e^{-u}  \frac{du}{k \cdot (\frac{x}{\lambda})^{k-1}}\\
+&= \frac{k}{\lambda} \cdot  \int_0^{ (\frac{z}{\lambda})^k} e^{-u} du \\
+&= \frac{k}{\lambda} \cdot (-e^{-u})_0^{ (\frac{z}{\lambda})^k} \\
+&= \frac{k}{\lambda} \cdot (-e^{-(\frac{z}{\lambda})^k} - (-1)) \\
+&= \frac{k}{\lambda} \cdot (1 - e^{-(\frac{z}{\lambda})^k}) \\
+\end{align*}
+\end{enumerate}
+\end{document}
