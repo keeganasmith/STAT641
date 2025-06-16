@@ -55,16 +55,42 @@ F(z) &= \int_0^{z}\frac{k}{\lambda} (\frac{x}{\lambda})^{k-1}e^{-(\frac{x}{\lamb
 using u substitution where: 
 \begin{align*}
 u &= (\frac{x}{\lambda})^k \\
-du &= k \cdot (\frac{x}{\lambda})^{k-1}dx \\
-dx &= \frac{du}{k \cdot (\frac{x}{\lambda})^{k-1}} \\
+du &= \frac{k}{\lambda} \cdot (\frac{x}{\lambda})^{k-1}dx \\
+dx &= \frac{du}{\frac{k}{\lambda} \cdot (\frac{x}{\lambda})^{k-1}} \\
 \end{align*}
 Thus we have: \\
 \begin{align*}
-F(z) &= \int_0^{(\frac{z}{\lambda})^k}\frac{k}{\lambda} (\frac{x}{\lambda})^{k-1}e^{-u}  \frac{du}{k \cdot (\frac{x}{\lambda})^{k-1}}\\
-&= \frac{k}{\lambda} \cdot  \int_0^{ (\frac{z}{\lambda})^k} e^{-u} du \\
-&= \frac{k}{\lambda} \cdot (-e^{-u})_0^{ (\frac{z}{\lambda})^k} \\
-&= \frac{k}{\lambda} \cdot (-e^{-(\frac{z}{\lambda})^k} - (-1)) \\
-&= \frac{k}{\lambda} \cdot (1 - e^{-(\frac{z}{\lambda})^k}) \\
+F(z) &= \int_0^{(\frac{z}{\lambda})^k}\frac{k}{\lambda} (\frac{x}{\lambda})^{k-1}e^{-u}  \frac{du}{\frac{k}{\lambda} \cdot (\frac{x}{\lambda})^{k-1}}\\
+&= \int_0^{ (\frac{z}{\lambda})^k} e^{-u} du \\
+&= (-e^{-u})_0^{ (\frac{z}{\lambda})^k} \\
+&= (-e^{-(\frac{z}{\lambda})^k} - (-1)) \\
+&= (1 - e^{-(\frac{z}{\lambda})^k}) \\
+\end{align*}
+\item Quantile for p = .5: \\
+\begin{align*}
+p &= (1 - e^{-(\frac{z}{\lambda})^k}) \\
+1 - p &= e^{-(\frac{z}{\lambda})^k} \\
+-\ln(1 - p) &= -(\frac{z}{\lambda})^k \\
+(-\ln(1 - p))^{\frac{1}{k}} &= (\frac{z}{\lambda}) \\
+z &= (-\ln(1 - p))^{\frac{1}{k}} \cdot \lambda \\
+z &= (-\ln(1 - .5))^{\frac{1}{3}} \cdot 2 \\
+&\approx 1.77
+\end{align*}
+\item The survival function is: \\
+\begin{align*}
+S(t) &= 1 - F(t) \\
+&= 1 - (1 - e^{-(\frac{z}{\lambda})^k}) \\
+& = e^{-(\frac{z}{\lambda})^k} \\
+&=  e^{-(\frac{1}{2})^3} \\
+&\approx 0.8825
+\end{align*}
+\item The hazard function is: \\
+\begin{align*}
+H(t) &= \frac{f(t)}{S(t)} \\
+&= \frac{\frac{k}{\lambda} (\frac{t}{\lambda})^{k-1}e^{-(\frac{t}{\lambda})^k}}{e^{-(\frac{t}{\lambda})^k}} \\
+&= \frac{\frac{3}{2} (\frac{1}{2})^{3-1}e^{-(\frac{1}{2})^3}}{e^{-(\frac{1}{2})^3}} \\
+&\approx 0.375
 \end{align*}
 \end{enumerate}
+
 \end{document}
