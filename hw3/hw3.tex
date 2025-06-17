@@ -117,6 +117,126 @@ F(z) &= \int_0^{\eta(e^{bz} - 1)}\eta b e^{bx}e^{-u}\frac{du}{\eta b e^{bx}} \\
 S(t) &= 1 - F(t) \\
 &= 1 -  (1 - e^{-(\eta(e^{bz} - 1))}) \\
 &= e^{-(\eta(e^{bz} - 1))} \\
+&= e^{-(2 \cdot (e^{\frac{1}{2}} - 1))} \\
+&\approx 0.2732
 \end{align*}
+\item The hazard function is: \\
+\begin{align*}
+H(t) &= \frac{f(t)}{S(t)} \\
+&= \frac{\eta b e^{bz}e^{-\eta(e^{bz} - 1)}}{e^{-(\eta(e^{bz} - 1))}} \\
+&= \eta b e^{bz} \\
+&= 2 \cdot \frac{1}{2} e^{\frac{1}{2}} \\
+&\approx 1.6487 \\
+\end{align*}
+\end{enumerate}
+\section*{Question Group 2}
+\section*{2.1}
+\begin{enumerate}
+\item Iris Setosa: 4.5, 4.9, 5.3 for .1, .4, .8 quantiles respectively \\
+Iris Virginica: 5.8, 6.4, 7.2 for .1, .4, .8 quantiles respectively. \\
+This is the python code I wrote to solve this problem: \\
+\begin{verbatim}
+def iris_quantile(data, quantile):
+    n = len(data)
+    index = (n - 1) * quantile
+    return data[int(index)]
+
+if __name__ == "__main__":
+    iris_setosa_data = [
+        5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9,
+        5.4, 4.8, 4.8, 4.3, 5.8, 5.7, 5.4, 5.1, 5.7, 5.1,
+        5.4, 5.1, 4.6, 5.1, 4.8, 5.0, 5.0, 5.2, 5.2, 4.7,
+        4.8, 5.4, 5.2, 5.5, 4.9, 5.0, 5.5, 4.9, 4.4, 5.1,
+        5.0, 4.5, 4.4, 5.0, 5.1, 4.8, 5.1, 4.6, 5.3, 5.0
+    ]
+    iris_setosa_data = sorted(iris_setosa_data)
+    setosa_quantile = iris_quantile(iris_setosa_data, .1)
+    print(setosa_quantile)
+    setosa_quantile = iris_quantile(iris_setosa_data, .4)
+    print(setosa_quantile)
+    setosa_quantile = iris_quantile(iris_setosa_data, .8)
+    print(setosa_quantile)
+
+    virginica_data = [
+        6.3, 5.8, 7.1, 6.3, 6.5, 7.6, 4.9, 7.3, 6.7, 7.2,
+        6.5, 6.4, 6.8, 5.7, 5.8, 6.4, 6.5, 7.7, 7.7, 6.0,
+        6.9, 5.6, 7.7, 6.3, 6.7, 7.2, 6.2, 6.1, 6.4, 7.2,
+        7.4, 7.9, 6.4, 6.3, 6.1, 7.7, 6.3, 6.4, 6.0, 6.9,
+        6.7, 6.9, 5.8, 6.8, 6.7, 6.7, 6.3, 6.5, 6.2, 5.9
+    ]
+    virginica_data = sorted(virginica_data)
+    virginica_quantile = iris_quantile(virginica_data, .1)
+    print(virginica_quantile)
+    virginica_data = sorted(virginica_data)
+    virginica_quantile = iris_quantile(virginica_data, .4)
+    print(virginica_quantile)
+    virginica_data = sorted(virginica_data)
+    virginica_quantile = iris_quantile(virginica_data, .8)
+    print(virginica_quantile)
+\end{verbatim}
+\end{enumerate}
+\section*{2.2}
+\begin{enumerate}
+\item f(5) = 0.0607, f(7) = 0.4006, wrote the following python code: \\
+\begin{verbatim}
+import math
+def K(u):
+    return 1 / math.sqrt(2 * math.pi) * math.e**(-u**2 / 2) 
+
+def kernel_estimator(n, h, kernel_function, data, y):
+    result = 0
+    coefficient = 1 / (n * h)
+    for i in range(0, len(data)):
+        input = (y - data[i]) / h
+        result += kernel_function(input)
+    return coefficient * result
+
+if __name__ == "__main__":
+    virginica_data = [
+        6.3, 5.8, 7.1, 6.3, 6.5, 7.6, 4.9, 7.3, 6.7, 7.2,
+        6.5, 6.4, 6.8, 5.7, 5.8, 6.4, 6.5, 7.7, 7.7, 6.0,
+        6.9, 5.6, 7.7, 6.3, 6.7, 7.2, 6.2, 6.1, 6.4, 7.2,
+        7.4, 7.9, 6.4, 6.3, 6.1, 7.7, 6.3, 6.4, 6.0, 6.9,
+        6.7, 6.9, 5.8, 6.8, 6.7, 6.7, 6.3, 6.5, 6.2, 5.9
+    ]
+    f_5 = kernel_estimator(len(virginica_data), .5, K, virginica_data, 5)
+    print("f_5: ", f_5)
+
+    f_7 = kernel_estimator(len(virginica_data), .5, K, virginica_data, 7)
+    print("f_7: ", f_7)
+\end{verbatim}
+\item f(5) = 0.0416, f(7) = .25 I wrote the following code to do so: \\
+\begin{verbatim}
+def frequency_histogram(data, width, y):
+    num_bins = int(data[-1] / width) + 1
+    bin_freqs = [0] * num_bins
+    for i in range(0, len(data)):
+        bin_index = int(data[i] / width)
+        bin_freqs[bin_index] += 1
+    relative_freqs = [0] * num_bins
+    for i in range(0, len(relative_freqs)):
+        relative_freqs[i] = bin_freqs[i] / len(data)
+    concentrations = [0] * num_bins
+    for i in range(0, len(concentrations)):
+        concentrations[i] = relative_freqs[i] / width
+    bin_index = int(y / width)
+    return concentrations[bin_index]
+
+if __name__ == "__main__":
+    virginica_data = [
+        6.3, 5.8, 7.1, 6.3, 6.5, 7.6, 4.9, 7.3, 6.7, 7.2,
+        6.5, 6.4, 6.8, 5.7, 5.8, 6.4, 6.5, 7.7, 7.7, 6.0,
+        6.9, 5.6, 7.7, 6.3, 6.7, 7.2, 6.2, 6.1, 6.4, 7.2,
+        7.4, 7.9, 6.4, 6.3, 6.1, 7.7, 6.3, 6.4, 6.0, 6.9,
+        6.7, 6.9, 5.8, 6.8, 6.7, 6.7, 6.3, 6.5, 6.2, 5.9
+    ]
+    virginica_data = sorted(virginica_data)
+    f_5 = frequency_histogram(virginica_data, .48, 5)
+    print("f5: ", f_5)
+    f_7 = frequency_histogram(virginica_data, .48, 7)
+    print("f7: ", f_7)
+\end{verbatim}
+\item The point with the smallest contribution is 4.9 which had a weight of 5.894e-05 \\
+\item The point with the largest contribution is 7.1 which had a weight of 0.3910
 \end{enumerate}
 \end{document}
