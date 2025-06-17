@@ -92,5 +92,31 @@ H(t) &= \frac{f(t)}{S(t)} \\
 &\approx 0.375
 \end{align*}
 \end{enumerate}
-
+\section*{1.2}
+\begin{enumerate}
+\item CDF of gompertz: \\
+\begin{align*}
+F(z) &= \int_0^z\eta b e^{bx}e^{-\eta(e^{bx} - 1)}dx \\
+\end{align*}
+Using u sub where: \\
+\begin{align*}
+u &= \eta(e^{bx} - 1) \\
+du &= \eta b e^{bx}dx \\
+dx &= \frac{du}{\eta b e^{bx}} 
+\end{align*}
+We then have: \\
+\begin{align*}
+F(z) &= \int_0^{\eta(e^{bz} - 1)}\eta b e^{bx}e^{-u}\frac{du}{\eta b e^{bx}} \\
+&= \int_0^{\eta(e^{bz} - 1)}e^{-u}du \\
+&= (-e^{-u})_0^{\eta(e^{bz} - 1)} \\
+&= (-e^{-(\eta(e^{bz} - 1))} - (-1)) \\
+&= 1 - e^{-(\eta(e^{bz} - 1))} \\
+\end{align*}
+\item The survival function is: \\
+\begin{align*}
+S(t) &= 1 - F(t) \\
+&= 1 -  (1 - e^{-(\eta(e^{bz} - 1))}) \\
+&= e^{-(\eta(e^{bz} - 1))} \\
+\end{align*}
+\end{enumerate}
 \end{document}
