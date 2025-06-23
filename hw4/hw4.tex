@@ -109,4 +109,37 @@ print(MLE)
 \end{verbatim}
 \item The numerical output was 2.43
 \end{enumerate}
+\section*{Problem 3}
+\begin{enumerate}
+\item The survival function of the poisson distribution is: \\
+\[
+S(x) = 1 - F(x)
+\]
+where $F(x)$ is the cdf of the Poisson distribution and is defined as: \\
+\begin{align*}
+F(x) &= \sum_{k=0}^{x}\frac{\lambda^ke^{-\lambda}}{k!}\\
+\end{align*}
+The problem does not state that we need to find a closed form for $S(x)$, so we can just write: \\
+\[
+S(x) = 1 - \sum_{k=0}^{x}\frac{\lambda^ke^{-\lambda}}{k!}
+\]
+\item Plugging $x = 2$ and $\lambda = 2.4286$ into the above we get: \\
+\begin{align*}
+S(2) &= 1 - (\frac{2.4286^0e^{-2.4286}}{0!} + \frac{2.4286^1e^{-2.4286}}{1!} + \frac{2.4286^2e^{-2.4286}}{2!}) \\
+&\approx 0.4359
+\end{align*}
+\item Instead of using the poisson distribution, we can use a non-parametric estimation where we use the edf:\\
+\[
+F(x) = \frac{1}{n}\sum_{k=0}^{n-1}I(y_k \leq x)
+\]
+where the survival function is: \\
+\[
+S(x) = 1 - \frac{1}{n}\sum_{k=0}^{n-1}I(y_k \leq x)
+\]
+so we end up with an estimation of: \\
+\[
+S(2) = 1 - \frac{4}{7} \approx 0.4286
+\]
+\end{enumerate}
+We can see that the estimations are surprisingly close, especially considering the sample size. This suggests that the Poisson might be a good estimation of the population distribution. 
 \end{document}
