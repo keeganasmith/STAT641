@@ -1,0 +1,96 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{lipsum}  
+\usepackage{listings} 
+\usepackage{xcolor}   
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{verbatim}
+
+% Define macros for title and author
+\newcommand{\thetitle}{STAT 641 \\ Homework 4}
+\newcommand{\theauthor}{Keegan Smith}
+
+\title{\thetitle}
+\author{\theauthor}
+
+\pagestyle{fancy}
+\fancyhf{}  % Clear all header and footer fields
+\fancyhead[L]{\nouppercase{\rightmark}}
+\fancyhead[C]{\thetitle}  % Title in the center
+\fancyhead[R]{\theauthor}  % Your name on the right
+
+\lstset{ %
+  backgroundcolor=\color{lightgray},   % choose the background color
+  basicstyle=\ttfamily\small,          % size of fonts used for the code
+  keywordstyle=\color{blue},           % color for keywords
+  commentstyle=\color{green},          % color for comments
+  stringstyle=\color{red},             % color for strings
+  numbers=left,                        % where to put the line-numbers
+  numberstyle=\tiny\color{gray},       % style for line-numbers
+  stepnumber=1,                        % the step between two line-numbers
+  numbersep=5pt,                       % how far the line-numbers are from the code
+  frame=single,                        % adds a frame around the code
+  rulecolor=\color{black},             % frame color
+  breaklines=true,                     % automatic line breaking
+  breakatwhitespace=false,             % automatic breaks should only happen at whitespace
+  showspaces=false,                    % don't show spaces in the code
+  showstringspaces=false,              % don't show spaces in strings
+  showtabs=false,                      % don't show tabs in the code
+}
+
+\begin{document}
+
+\maketitle
+\section*{Problem 1}
+\begin{enumerate}
+\item the trimmed mean is 886.7853403141361 and the untrimmed mean is 955.3713080168776. This would suggest that the data has some extreme values to the right, and is right skewed. \\
+\item the survival function is: \\
+\[
+S(t) = 1 - F(t)
+\]
+We can derive $F(t)$ from the pdf, (and since $t$ is a time any probability for $t < 0$ is 0, so we are only considering $t \geq 0$): \\
+\begin{align*}
+F(t) &= \int_{0}^{t}\lambda e^{-\lambda x} \\
+&= (-e^{-\lambda x})_{0}^{t} \\
+&= (-e^{-\lambda t} - (-1)) \\
+&= 1 - e^{-\lambda t}
+\end{align*}
+So we have: \\
+\begin{align*}
+S(t) &= e^{-\lambda t} \\
+\ln(S(t)) &= -\lambda t \\ 
+\end{align*}
+So if $S(t)$ is a good estimate, then the plot $t$ vs $\ln(S(t))$ should be a linear plot with slope: \\
+\[
+\frac{t}{-\lambda t} = \frac{1}{-\lambda}
+\]
+
+\item We have the likelihood function: \\
+\begin{align*}
+L(\lambda;y) &= \Pi_{k = 0}^{n-1}\lambda e^{-\lambda y_k} \\
+&= \lambda^ne^{\sum_{k=0}^{n-1}-\lambda y_k} \\
+&= \lambda^ne^{-\lambda \cdot \sum_{k=0}^{n-1} y_k} \\
+\end{align*}
+The log likelihood function is then: \\
+\begin{align*}
+\ln(L(\lambda;y)) &= \ln(\lambda^ne^{-\lambda \cdot \sum_{k=0}^{n-1} y_k}) \\
+&= \ln(\lambda^n) + (-\lambda \cdot \sum_{k=0}^{n-1} y_k) \\
+&= n \cdot \ln(\lambda) -\lambda \cdot \sum_{k=0}^{n-1} y_k
+\end{align*}
+The derivative of the log likelihood function w.r.t $\lambda$ is: \\
+\begin{align*}
+\frac{d}{d\lambda} (n \cdot \ln(\lambda) -\lambda \cdot \sum_{k=0}^{n-1} y_k) &= n \cdot \frac{1}{\lambda} - \sum_{k=0}^{n-1} y_k \\
+&= \frac{n}{\lambda} - \sum_{k=0}^{n-1} y_k
+\end{align*}
+Solving for the maximum: \\
+\begin{align*}
+\frac{n}{\lambda} - \sum_{k=0}^{n-1} y_k &= 0 \\
+\lambda &= \frac{n}{\sum_{k=0}^{n-1} y_k} \\
+&= \frac{1}{\mu}
+\end{align*}
+Thus the MLE estimate for $\lambda$ is $\frac{1}{955.3713} \approx 0.001047$
+\end{enumerate}
+\end{document}
