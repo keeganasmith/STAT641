@@ -45,7 +45,10 @@
 
 \maketitle
 \section*{Problem 1}
+First of all, in the data, none of the entries are marked with status == 0, so I will be treating this data as uncensored. \\
 \begin{enumerate}
+\item 
+\begin{enumerate}[label=\alph*)]
 \item the trimmed mean is 886.7853403141361 and the untrimmed mean is 955.3713080168776. This would suggest that the data has some extreme values to the right, and is right skewed. \\
 \item the survival function is: \\
 \[
@@ -67,7 +70,11 @@ So if $S(t)$ is a good estimate, then the plot $t$ vs $\ln(S(t))$ should be a li
 \[
 \frac{t}{-\lambda t} = \frac{1}{-\lambda}
 \]
-
+The actual plot is: \\
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig_1.png}
+\end{figure}
 \item We have the likelihood function: \\
 \begin{align*}
 L(\lambda;y) &= \Pi_{k = 0}^{n-1}\lambda e^{-\lambda y_k} \\
@@ -92,5 +99,83 @@ Solving for the maximum: \\
 &= \frac{1}{\mu}
 \end{align*}
 Thus the MLE estimate for $\lambda$ is $\frac{1}{955.3713} \approx 0.001047$
+\item The exponential distribution estimated probability that a male will have a survival time $>$ 1200 is: \\
+\begin{align*}
+P(t > 1200) &= 1 - P(t \leq 1200) \\
+&= 1 - F(t) \\
+&= 1 - (1 - e^{-\lambda t}) \\
+&= e^{-0.001047 \cdot 1200}\\ 
+&= 0.2846770212809416
+\end{align*}
+The distribution free estimate is: \\
+\begin{align*}
+P(t > 1200) &= 1 - P(t \leq 1200) \\
+&= 1 - F(1200) \\
+&= 1 - 0.7257383966244726 \\
+&= 0.2742616033755274
+\end{align*}
+\item First I'm just going to derive the Quantile function to make this slightly less painful: \\
+\begin{align*}
+z &= 1 - e^{-\lambda t} \\
+-z + 1 = e^{-\lambda t} \\
+\ln(-z + 1) &= -\lambda t \\
+t &= \frac{\ln(-z + 1)}{-\lambda}
+\end{align*}
+So: \\
+\[
+Q(z) = \frac{\ln(-z + 1)}{-\lambda} \\
+\]
+Thus we have the MLE median: \\
+\begin{align*}
+Q(.5) &= \frac{\ln(-.5 + 1)}{-0.001047} \\
+&= 662.0316910792219
+\end{align*}
+MLE IQR: \\
+\begin{align*}
+Q(.75) - Q(.25) &= \frac{\ln(-.75 + 1)}{-0.001047} - \frac{\ln(-.25 + 1)}{-0.001047} \\
+&= 1049.2954046495795
+\end{align*}
+Distribution free median is 833, the IQR is 793. These vary greatly from the MLE estimates for the exponential distribution, implying that the exponential distribution may not be a great fit for the distribution of survival times. \\
+\end{enumerate}
+\item The distribution free estimates for the mean and standard deviation are simply the sample mean and standard deviation respectively, which are: $955.371308$ and $634.253830$ for males, and $896.506977$ and $569.495299$ for females. \\
+\item For males the estimated median is 833 and the MAD is 567.8280207561156. For females the estimated median is 759 and the MAD is 558.9325426241661.\\
+\begin{verbatim}
+def mad(data):
+  data = np.asarray(data)
+  c = np.median(data)
+  deviations = np.abs(data - c)
+  raw_mad = np.median(deviations)
+  return raw_mad / 0.6745
+\end{verbatim}
+\item The above results would imply that the female average survival time is less than the male average survival time and that the variability in survival times is less for females than for males.
+\end{enumerate}
+\section*{Problem 2}
+\begin{enumerate}
+\item This experiment is using random censoring since there isn't a specified time when the experiment was stopped, patients could leave at random times. Knowing this, we will use Kaplan-Meier to approximate the survival function. Using the R code from handout 7, we get the following survival function: \\
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Rplots.pdf}
+\end{figure}
+\newpage
+The code was: \\
+\begin{verbatim}
+library(survival)
+
+df <- data.frame(
+  time   = c(2391, 2815, 1884, 1656, 2184, 2118, 1905, 1375, 259, 1790, 2413, 2761, 1823),
+  status = c(1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1)
+)
+
+km.fit <- survfit(Surv(time, status) ~ 1, data = df)
+
+print(km.fit)
+plot(km.fit,conf.int=FALSE,log=FALSE,
+main="Kaplan-Meier Estimator of Survival Function",xlab="Strength of Cord",
+ylab="Survival Function")
+\end{verbatim}
+\item The estimated mean from the survival function is 2135 and the estimated median is 2391 using the following rcode: \\
+\begin{verbatim}
+  
+\end{verbatim}
 \end{enumerate}
 \end{document}
