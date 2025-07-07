@@ -151,13 +151,21 @@ def mad(data):
 \end{enumerate}
 \section*{Problem 2}
 \begin{enumerate}
-\item This experiment is using random censoring since there isn't a specified time when the experiment was stopped, patients could leave at random times. Knowing this, we will use Kaplan-Meier to approximate the survival function. Using the R code from handout 7, we get the following survival function: \\
+\item This experiment is using random censoring since there isn't a specified time when the experiment was stopped, patients could leave at random times. Knowing this, we will use Kaplan-Meier to approximate the survival function. Using the R code from handout 7, we get the following survival functions for treatments 1 and 2: \\
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{Rplots.pdf}
+    \includegraphics[width=0.8\textwidth]{treatment1_survival.png}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{treatment2_survival.png}
 \end{figure}
 \newpage
-The code was: \\
+\item The estimated mean from the survival function for treatment 1 is 2135 and the estimated median is 2391. The estimated mean from the survival function for treatment 2 is 2000 and the estimated median is 1814. \\
+\item From the estimated mean recovery times, it would appear that treatment 2 is more effective than treatment 1. \\
+\item The estimated mean and median for treatment 1 are 1596.857142857143 and 1375 respectively, for treatment 2 they are 1050.4285714285713 and 1117 respectively. \\
+\end{enumerate}
+The code used for this problem is below: \\
 \begin{verbatim}
 library(survival)
 
@@ -169,13 +177,41 @@ df <- data.frame(
 km.fit <- survfit(Surv(time, status) ~ 1, data = df)
 
 print(km.fit)
+png("treatment1_survival.png", width=800, height=600)
+
 plot(km.fit,conf.int=FALSE,log=FALSE,
-main="Kaplan-Meier Estimator of Survival Function",xlab="Strength of Cord",
+main="Kaplan-Meier Estimator of Survival Function (Treatment 1)",xlab="Recovery Time",
 ylab="Survival Function")
+summary(km.fit)
+print(km.fit, print.rmean=TRUE, rmean="individual")
+
+df <- data.frame(
+  time   = c(2312, 2501, 2691, 1548, 3329, 2154, 766, 1405, 1117, 232, 206, 2079),
+  status = c(0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1)
+)
+
+km.fit <- survfit(Surv(time, status) ~ 1, data = df)
+
+print(km.fit)
+png("treatment2_survival.png", width=800, height=600)
+
+plot(km.fit,conf.int=FALSE,log=FALSE,
+main="Kaplan-Meier Estimator of Survival Function (Treatment 2)",xlab="Recovery Time",
+ylab="Survival Function")
+summary(km.fit)
+print(km.fit, print.rmean=TRUE, rmean="individual")
 \end{verbatim}
-\item The estimated mean from the survival function is 2135 and the estimated median is 2391 using the following rcode: \\
-\begin{verbatim}
-  
-\end{verbatim}
+\section*{Problem 3}
+\begin{enumerate}
+\item A (type 1 censoring)\\
+\item B (type 2 censoring)\\
+\item C (right censoring) \\
+\item C (random censoring) \\
+\item A (left censoring since you know the patient got the disease at a time less than or equal to the start of the study) \\
+\item C (random censoring) \\
+\item B (type 2 censoring) \\
+\item A (random censoring) \\
+\item D (random censoring) \\
+\item C (random censoring) 
 \end{enumerate}
 \end{document}

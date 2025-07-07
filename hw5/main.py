@@ -8,8 +8,29 @@ def mad(data):
     deviations = np.abs(data - c)
     raw_mad = np.median(deviations)
     return raw_mad / 0.6745
-    
 
+def mean_median_without_censor(data, censor):
+    i = 0
+    censor_index =0
+    while(i < len(data)):
+        if(censor[censor_index] == 0):
+            del data[i]
+            censor_index += 1
+            continue
+        censor_index += 1
+        i += 1
+    sorted(data)
+    median = None
+    if(len(data) % 2 != 0):
+        median = data[len(data) // 2]        
+    else:
+        median = (data[len(data) // 2] + data[len(data) // 2 - 1]) / 2
+    
+    average = 0
+    for value in data:
+        average += value
+    average /= len(data)
+    return average, median
 
 def trimmed_mean(df, alpha, column):
     num = int(len(df) * alpha)
@@ -52,3 +73,10 @@ if __name__ == "__main__":
     mad_result = mad(observed_df["time"])
     print(mad_result)
 
+    time   = [2391, 2815, 1884, 1656, 2184, 2118, 1905, 1375, 259, 1790, 2413, 2761, 1823]
+    status = [1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1]
+    print("treatment 1 average and median: ", mean_median_without_censor(time, status))
+
+    time   = [2312, 2501, 2691, 1548, 3329, 2154, 766, 1405, 1117, 232, 206, 2079]
+    status = [0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1]
+    print("treatment 2 average and median: ", mean_median_without_censor(time, status))
