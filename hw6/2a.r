@@ -12,7 +12,7 @@ B = 9999
 thestS = numeric(B)
 thestS = rep(0,times =B)
 for (i in 1:B)
-thestS[i] = median(sample(y,replace=T))
+thestS[i] = mean(sample(y,replace=T))
 RS= sort(thestS-thest)
 LRS = RS[250]
 URS = RS[9750]

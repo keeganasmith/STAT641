@@ -251,7 +251,7 @@ thU = thest-LRS
 thL
 thU
 \end{verbatim}
-This yields the interval $[104.408, 137.508]$
+This yields the interval $[86.876, 121.981]$
 \item Again adapting the code from handout 11:
 \begin{verbatim}
 n= length(y)
@@ -294,6 +294,119 @@ thU
 \end{verbatim}
 This results in the interval $[86.94429, 129.0083]$
 \end{enumerate}
-\item 
+\item For basic bootstrap we have: \\
+\begin{verbatim}
+n = 100
+B_sim = 50
+true_mu = 100
+count = 0
+width_total = 0
+for (i in 1:B_sim) {
+  x_sim <- rexp(n, rate = 1/true_mu)
+  thest = mean(x_sim)
+  B = 9999
+  thestS = numeric(B)
+  thestS = rep(0,times =B)
+  for (i in 1:B)
+  thestS[i] = mean(sample(x_sim,replace=T))
+  RS= sort(thestS-thest)
+  LRS = RS[249] #handout was wrong, wasn't doing 0 indexing.... too lazy to fix it in my previous work. 
+  URS = RS[9749]
+  thL = thest-URS
+  thU = thest-LRS
+  width = thU - thL
+  width_total += width
+  if (thL <= true_mu && true_mu <= thU) {
+    count <- count + 1
+  }
+}
+
+cov <- count / B_sim
+cov
+width_avg = width_total / B_sim
+width_avg
+\end{verbatim}
+which yields coverage $.96$ and average width 38.66296. \\
+For studentized we have: \\
+\begin{verbatim}
+n = 100
+B_sim = 50
+true_mu = 100
+count = 0
+width_total = 0
+for (i in 1:B_sim) {
+    x_sim <- rexp(n, rate = 1/true_mu)
+    thest = mean(x_sim)
+    V = thest**2/n
+    B = 9999
+    W = numeric(B)
+    W = rep(0,times =B)
+    for (i in 1:B)
+    W[i] = mean(sample(x_sim,replace=T))
+    Z = sqrt(n)*(W-thest)/W
+    Z = sort(Z)
+    LZ = Z[250]
+    UZ = Z[9750]
+    thL = thest-UZ*sqrt(V)
+    thU = thest-LZ*sqrt(V)
+    width = thU - thL
+    width_total = width_total + width
+    if (thL <= true_mu && true_mu <= thU) {
+        count <- count + 1
+    }
+}
+
+cov <- count / B_sim
+cov
+width_avg = width_total / B_sim
+width_avg
+\end{verbatim}
+Which yields a coverage of .98 and an average width of 39.16417 \\
+For parametric bootstrap we have: \\
+\begin{verbatim}
+n = 100
+B_sim = 50
+true_mu = 100
+count = 0
+width_total = 0
+for (i in 1:B_sim) {
+    x_sim <- rexp(n, rate = 1/true_mu)
+    thest = mean(x_sim)
+    V = thest**2/n
+    B = 9999
+    W = numeric(B)
+    W = rep(0,times =B)
+    lambda_hat <- 1 / thest 
+    for(i in seq_len(B)) {
+    W[i] <- mean(rexp(n, rate = lambda_hat))
+    }
+    Z = sqrt(n)*(W-thest)/W
+    Z = sort(Z)
+    LZ = Z[250]
+    UZ = Z[9750]
+    thL <- thest - UZ * sqrt(V)
+    thU <- thest - LZ * sqrt(V)
+    width = thU - thL
+    width_total = width_total + width
+    if (thL <= true_mu && true_mu <= thU) {
+        count <- count + 1
+    }
+}
+cov <- count / B_sim
+cov
+width_avg = width_total / B_sim
+width_avg
+\end{verbatim}
+Which yields a coverage of .98 and an average width of 40.04141 \\
+\end{enumerate}
+\section*{Problem 3}
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item from handout 11, the formula for Wald CI for a proportion is: \\
+\[
+CI = \hat{p} \pm Z_{\frac{\alpha}{2}} \cdot \frac{\sqrt{\hat{p} \cdot (1 - \hat{p})}}{\sqrt{n}}
+\]
+\end{enumerate}
 \end{enumerate}
 \end{document}
