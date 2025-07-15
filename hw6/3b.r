@@ -1,6 +1,5 @@
-y <- c(0.8402, 1.0644, 1.1298, 1.4314, 1.7795, 1.9121, 2.2343, 2.3424, 2.3559, 2.3855,
-2.5734, 2.5815, 2.5893, 2.7562, 2.9040, 2.9295, 3.1124, 3.5490, 3.7684, 3.7953,
-3.8846, 3.9766, 4.1918, 4.3887, 4.7106, 4.8918, 4.9716, 6.5018, 7.0740, 7.2158)
+y <- c(10.75, 10.87, 10.92, 11.23, 11.26, 11.30, 11.31, 11.32, 11.39, 11.41, 11.52, 11.55,
+11.58, 11.62, 11.62, 11.73, 11.77, 11.80, 11.88, 11.90, 11.93, 12.02, 12.10, 12.27)
 n = length(y)
 yt0 = log(y)
 s = sum(yt0)
@@ -29,16 +28,21 @@ imax= which(Lt==max(Lt))
 thmax= th[imax]
 thmax
 
-y = (y^thmax - 1) / thmax
-mean = mean(y)
-std = sd(y)
-error = qnorm(0.975)*std/sqrt(n)
-lower = mean - error
-upper = mean + error
+y = (y^3 - 1) / 3
+#now do the thing
+n = length(y)
+G = .90
+P = .95
+za = qnorm(G)
+zb = qnorm(P)
+a = 1-za^2/(2*(n-1))
+b = zb^2-za^2/n
+K1Side = (zb+sqrt(zb^2-a*b))/a
+lower = mean(y) - K1Side * sd(y)
 lower
-upper
 
-lower_transform = (lower * thmax + 1)^(1 / thmax)
-upper_transform = (upper * thmax + 1)^(1 / thmax)
+lower_transform = (lower * 3 + 1)^(1/3)
 lower_transform
-upper_transform
+# upper_transform = (upper * 3 + 1)^(1/3)
+# lower_transform
+# upper_transform

@@ -168,11 +168,11 @@ thmax
 \end{verbatim}
 This yields $\theta = 0.325$. Thus the transformation is: \\
 \[
-Y = \frac{y^{.5} - 1}{.5}
+Y = \frac{y^{.325} - 1}{.325}
 \]
 We can apply this transformation and find the 95\% CI of the mean of the new distribution with R: \\
 \begin{verbatim}
-y = (y^.5 - 1) / .5
+y = (y^.325 - 1) / .325
 mean = mean(y)
 std = sd(y)
 error = qnorm(0.975)*std/sqrt(n)
@@ -183,43 +183,59 @@ upper
 \end{verbatim}
 we can then apply the inverse of the transformation function to get back the lower and upper bounds for the original distribution: \\
 \begin{verbatim}
-lower_transform = (lower * .5 + 1)^(2)
-upper_transform = (upper * .5 + 1)^(2)
+lower_transform = (lower * .325 + 1)^(1 / .325)
+upper_transform = (upper * .325 + 1)^(1 / .325)
 lower_transform
 upper_transform
 \end{verbatim}
-This results in the 95\% CI of $[2.583642, 3.729245]$
-\item For this, we simply need to find a 95\% CI for the 95th quantile, our interval will simply be from $[0, ci_upperbound]$. Again we apply the transformation: \\
+This results in the 95\% CI of $[2.526999, 3.663964]$
+\item For this, we will construct a two sided tolerance interval. First we will use a power transformation to normalize the data, then we will use the code from handout 11 for creating a two sided tolerance interval, and then we will back transform the interval endpoints: \\
 \begin{verbatim}
-y = (y^.5 - 1) / .5
-\end{verbatim}
-We can then use the same code from part b, except this time use $P = .95$: \\
-\begin{verbatim}
-n=length(y)
-L=.95
-P=.95
-s=ceiling(n*P)-1
-r=floor(n*P)+1
-cov=0
-while(s<n-1 && r>1 && cov<L)
-{s=s+1
-cov=pbinom(s-1,n,P)-pbinom(r-1,n,P)
-if(cov>=L) break;
-r=r-1
-cov=pbinom(s-1,n,P)-pbinom(r-1,n,P)
+y <- c(0.8402, 1.0644, 1.1298, 1.4314, 1.7795, 1.9121, 2.2343, 2.3424, 2.3559, 2.3855,
+2.5734, 2.5815, 2.5893, 2.7562, 2.9040, 2.9295, 3.1124, 3.5490, 3.7684, 3.7953,
+3.8846, 3.9766, 4.1918, 4.3887, 4.7106, 4.8918, 4.9716, 6.5018, 7.0740, 7.2158)
+n = length(y)
+yt0 = log(y)
+s = sum(yt0)
+varyt0 = var(yt0)
+Lt0 = -1*s - .5*n*(log(2*pi*varyt0)+1)
+th = 0
+Lt = 0
+t = -3.01
+i = 0
+while(t < 3)
+{t = t+.001
+i = i+1
+th[i] = t
+yt = (y^t -1)/t
+varyt = var(yt)
+Lt[i] = (t-1)*s - .5*n*(log(2*pi*varyt)+1)
+if(abs(th[i])<1.0e-10)Lt[i]<-Lt0
+if(abs(th[i])<1.0e-10)th[i]<-0
 }
-y[r]
-y[s]
-cov
+# The following outputs the values of the likelihood and theta and yields
+# the value of theta where likelihood is a maximum
+out = cbind(th,Lt)
+Ltmax= max(Lt)
+Ltmax
+imax= which(Lt==max(Lt))
+thmax= th[imax]
+thmax
+
+y = (y^thmax - 1) / thmax
+G = .95
+P = .95
+Chi = qchisq(1-(1 - G) / 2,n-1)
+z = qnorm((1+P)/2)
+K2Side = sqrt(((n-1)*(n+1)*z^2)/(n*Chi))
+lower = mean(y) - K2Side * sd(y)
+upper = mean(y) + K2Side * sd(y)
+lower_transform = (lower * thmax + 1)^(1 / thmax)
+upper_transform = (upper * thmax + 1)^(1 / thmax)
+lower_transform
+upper_transform
 \end{verbatim}
-Which results in $[3.099725, 3.319398]$. We can then back-transform these values: \\
-\begin{verbatim}
-lower = (y[r] * .5 + 1)^(2)
-upper = (y[s] * .5 + 1)^(2)
-lower
-upper
-\end{verbatim}
-Which yields $[6.5018, 7.074]$, thus we can be 95\% confident that 95\% of samples will lie between 0 and 7.074. 
+The result is that we can be 95\% confident that at least 95\% of values will fall in the interval [1.174811, 6.343665]
 \end{enumerate}
 \section*{Problem 2}
 \begin{enumerate}
@@ -407,6 +423,251 @@ Which yields a coverage of .98 and an average width of 40.04141 \\
 \[
 CI = \hat{p} \pm Z_{\frac{\alpha}{2}} \cdot \frac{\sqrt{\hat{p} \cdot (1 - \hat{p})}}{\sqrt{n}}
 \]
+From the data we can easily find that $\hat{p} = \frac{9}{24} \approx .375$, so for a 95\% CI we have: \\
+\begin{align*}
+CI &= .375 \pm Z_{.025} \cdot \frac{\sqrt{.375 \cdot (1 - .375)}}{\sqrt{24}} \\
+&= .375 \pm -1.96 \cdot \frac{\sqrt{.375 \cdot (1 - .375)}}{\sqrt{24}} \\
+&= 0.18131049331468677, 0.5686895066853133
+\end{align*}
+\item from handout 11, the formula for Wilson CI for a proportion is: \\
+\[
+CI = \frac{Y + \frac{1}{2} \cdot Z_{\frac{\alpha}{2}}^2}{n + Z_{\frac{\alpha}{2}}^2} \pm \frac{\sqrt{n} Z_{\frac{\alpha}{2}} \sqrt{\hat{p}(1 - \hat{p}) + \frac{1}{4n}Z_{\frac{\alpha}{2}}^2}}{n + Z_{\frac{\alpha}{2}}^2}
+\]
+We know $Y = 9$, plugging everything in we get: \\
+\begin{align*}
+\frac{Y + \frac{1}{2} \cdot Z_{\frac{\alpha}{2}}^2}{n + Z_{\frac{\alpha}{2}}^2} \pm \frac{\sqrt{n} Z_{\frac{\alpha}{2}} \sqrt{\hat{p}(1 - \hat{p}) + \frac{1}{4n}Z_{\frac{\alpha}{2}}^2}}{n + Z_{\frac{\alpha}{2}}^2} &= \frac{9 + \frac{1}{2} \cdot 1.96^2}{24 + 1.96^2} \pm \frac{\sqrt{24} \cdot -1.96 \sqrt{.375(1 - .375) + \frac{1}{4 \cdot 24}1.96^2}}{24 + 1.96^2} \\
+&= 0.21159133433631455, 0.3922475719786219
+\end{align*}
+\item Adapting the previous code we have: \\
+\begin{verbatim}
+y <- c(10.75, 10.87, 10.92, 11.23, 11.26, 11.30, 11.31, 11.32, 11.39, 11.41, 11.52, 11.55,
+11.58, 11.62, 11.62, 11.73, 11.77, 11.80, 11.88, 11.90, 11.93, 12.02, 12.10, 12.27)
+n= length(y)
+thest = 9 / 24
+B = 9999
+thestS = numeric(B)
+thestS = rep(0,times =B)
+for (i in 1:B)
+thestS[i] = mean(sample(y,replace=T) > 11.7)
+RS= sort(thestS-thest)
+LRS = RS[250]
+URS = RS[9750]
+thL = thest-URS
+thU = thest-LRS
+thL
+thU
+\end{verbatim}
+which yields $[0.1666667, 0.5416667]$
 \end{enumerate}
+\item We will use power transformation to transform the data to a normal distribution. The code is still the same: \\
+\begin{verbatim}
+  y <- c(10.75, 10.87, 10.92, 11.23, 11.26, 11.30, 11.31, 11.32, 11.39, 11.41, 11.52, 11.55,
+11.58, 11.62, 11.62, 11.73, 11.77, 11.80, 11.88, 11.90, 11.93, 12.02, 12.10, 12.27)
+n = length(y)
+yt0 = log(y)
+s = sum(yt0)
+varyt0 = var(yt0)
+Lt0 = -1*s - .5*n*(log(2*pi*varyt0)+1)
+th = 0
+Lt = 0
+t = -3.01
+i = 0
+while(t < 3)
+{t = t+.001
+i = i+1
+th[i] = t
+yt = (y^t -1)/t
+varyt = var(yt)
+Lt[i] = (t-1)*s - .5*n*(log(2*pi*varyt)+1)
+if(abs(th[i])<1.0e-10)Lt[i]<-Lt0
+if(abs(th[i])<1.0e-10)th[i]<-0
+}
+# The following outputs the values of the likelihood and theta and yields
+# the value of theta where likelihood is a maximum
+out = cbind(th,Lt)
+Ltmax= max(Lt)
+Ltmax
+imax= which(Lt==max(Lt))
+thmax= th[imax]
+thmax
+\end{verbatim}
+this yields the optimal $\theta \approx 3$. Thus we have the transformation: \\
+\begin{verbatim}
+y = (y^3 - 1) / 3
+\end{verbatim} 
+and we then have the calculation of the tolerance lower bound: \\
+\begin{verbatim}
+n = length(y)
+G = .90
+P = .95
+za = qnorm(G)
+zb = qnorm(P)
+a = 1-za^2/(2*(n-1))
+b = zb^2-za^2/n
+K1Side = (zb+sqrt(zb^2-a*b))/a
+lower = mean(y) - K1Side * sd(y)
+lower
+\end{verbatim}
+And its back transformation: \\
+\begin{verbatim}
+lower_transform = (lower * 3 + 1)^(1/3)
+lower_transform
+\end{verbatim}
+Which yields a lower bound of 10.67127. So we are 95\% confident that at least 90\% of bug report times are greater than 10.67127. \\
+\end{enumerate}
+\section*{Problem 4}
+\begin{enumerate}
+\item The pmf for the poisson is: \\
+\[
+P(X = k) = \frac{\lambda^k \cdot e^{-\lambda}}{k!}
+\]
+in our case $\lambda = 18.4$. This is the python code i wrote to find the expected number of occurences in each range: \\
+\begin{verbatim}
+  import math
+def poisson(k, _lambda = 18.4):
+    return _lambda**k * math.e**(-_lambda) / math.factorial(k) 
+def q4():
+    ranges = [
+        [0, 10],
+        [11, 15],
+        [16, 20], 
+        [21, 25],
+        [26, 30],
+        [31, 125]
+    ]
+    probabilities = [0] * len(ranges)
+    index = 0
+    for range in ranges:
+        i = range[0]
+        while(i <= range[1]):
+            probabilities[index] += poisson(i)
+            i+= 1
+        index += 1
+    print(probabilities)
+    expected_values = [0] * len(ranges)
+    index = 0
+    for prob in probabilities:
+        expected_values[index] = prob * 150
+        index += 1
+    print(expected_values)
+def main():
+    q4()
+
+if __name__ == "__main__":
+    main()
+\end{verbatim}
+which yielded [3.7318574019243775, 34.71073099633768, 66.27724184984828, 37.056722125605354, 7.544586902599101, 0.6788607236853513] for the respective ranges. 
+\item I computed the Q stat in python as well: \\
+\begin{verbatim}
+observed = [5, 34, 64, 40, 5, 2]
+q = 0
+i = 0
+while(i < len(observed)):
+    q += (observed[i] - expected_values[i])**2 / expected_values[i]
+    i += 1
+print(q)
+\end{verbatim}
+which yields a q stat of 4.186811813146186. Plugging this into R: \\
+\begin{verbatim}
+k = 6
+Q = 4.186811813146186
+p = 1 - pchisq(Q, k - 1)
+p
+\end{verbatim}
+we get a p value of 0.5228452 > .25 which indicates the poisson model does in fact fit the distribution very well.
+\end{enumerate}
+\section*{Problem 5}
+\begin{enumerate}
+\item The handout recommends using A-C for when $n \geq 40$, so that's what we will use: \\
+\begin{verbatim}
+x <- c(5.8, 10.1, 12.0, 12.5, 16.0, 18.6, 18.9, 19.0, 19.2, 19.6, 21.5, 22.3, 23.2, 23.3,
+23.7, 24.3, 24.8, 25.2, 25.5, 25.9, 26.2, 26.3, 26.7, 26.8, 27.0, 27.1, 27.1, 27.1,
+27.2, 28.1, 28.1, 28.3, 28.4, 28.4, 28.6, 28.7, 29.5, 29.6, 29.7, 30.0, 30.2, 30.2,
+30.6, 30.8, 31.2, 31.5, 31.6, 31.8, 32.3, 32.4, 32.8, 33.1, 34.4, 34.6, 35.5, 36.6,
+36.7, 38.0, 38.9, 39.2)
+n = length(x)
+Y = sum(x < 30)
+p = Y / n
+p_hat = (Y + 2) / (n + 4)
+n_hat = n + 4
+lower = p_hat - 1.96 * sqrt(p_hat * (1 - p_hat)) / sqrt(n_hat)
+upper = p_hat + 1.96 * sqrt(p_hat * (1 - p_hat)) / sqrt(n_hat)
+lower
+upper
+\end{verbatim}
+yields: [0.5230698, 0.7581802]
+\item Using a very similar method to that used in problem 1 b, we have: \\
+\begin{verbatim}
+L=.95
+P=.5
+s=ceiling(n*P)-1
+r=floor(n*P)+1
+cov=0
+while(s<n-1 && r>1 && cov<L)
+{s=s+1
+cov=pbinom(s-1,n,P)-pbinom(r-1,n,P)
+if(cov>=L) break;
+r=r-1
+cov=pbinom(s-1,n,P)-pbinom(r-1,n,P)
+}
+x[r]
+x[s]
+cov
+\end{verbatim}
+which yields 26.3, 29.6 as the 95\% CI for the median. \\
+\item For this we will transform to normal, use the code for finding two sided tolerance confidence interval, then back-transform the endpoints: \\
+\begin{verbatim}
+yt0 = log(y)
+s = sum(yt0)
+varyt0 = var(yt0)
+Lt0 = -1*s - .5*n*(log(2*pi*varyt0)+1)
+th = 0
+Lt = 0
+t = -3.01
+i = 0
+while(t < 3)
+{t = t+.001
+i = i+1
+th[i] = t
+yt = (y^t -1)/t
+varyt = var(yt)
+Lt[i] = (t-1)*s - .5*n*(log(2*pi*varyt)+1)
+if(abs(th[i])<1.0e-10)Lt[i]<-Lt0
+if(abs(th[i])<1.0e-10)th[i]<-0
+}
+# The following outputs the values of the likelihood and theta and yields
+# the value of theta where likelihood is a maximum
+out = cbind(th,Lt)
+Ltmax= max(Lt)
+Ltmax
+imax= which(Lt==max(Lt))
+thmax= th[imax]
+thmax
+
+y = (y^thmax - 1) / thmax
+G = .95
+P = .95
+Chi = qchisq(1-(1 - G) / 2,n-1)
+z = qnorm((1+P)/2)
+K2Side = sqrt(((n-1)*(n+1)*z^2)/(n*Chi))
+lower = mean(y) - K2Side * sd(y)
+upper = mean(y) + K2Side * sd(y)
+lower_transform = (lower * thmax + 1)^(1 / thmax)
+upper_transform = (upper * thmax + 1)^(1 / thmax)
+lower_transform
+upper_transform
+\end{verbatim}
+We can be 95\% confident that at least 95\% of values will fall in [14.78721, 36.91857]
+\end{enumerate}
+\section*{Problem 6}
+\begin{enumerate}
+\item B \\
+\item A \\
+\item B \\
+\item B \\
+\item C \\
+\item D \\
+\item A \\
+\item A
 \end{enumerate}
 \end{document}

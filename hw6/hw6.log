@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.4.27)  14 JUL 2025 18:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.4.27)  14 JUL 2025 20:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -413,13 +413,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 192--193
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 196--197
-
+Overfull \hbox (131.4961pt too wide) in paragraph at lines 194--194
+ []\OT1/cmtt/m/n/10 y <- c(0.8402, 1.0644, 1.1298, 1.4314, 1.7795, 1.9121, 2.23
+43, 2.3424, 2.3559, 2.3855,[] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--216
+Overfull \hbox (94.74641pt too wide) in paragraph at lines 195--195
+ []\OT1/cmtt/m/n/10 2.5734, 2.5815, 2.5893, 2.7562, 2.9040, 2.9295, 3.1124, 3.5
+490, 3.7684, 3.7953,[] 
+ []
 
+
+Overfull \hbox (94.74641pt too wide) in paragraph at lines 196--196
+ []\OT1/cmtt/m/n/10 3.8846, 3.9766, 4.1918, 4.3887, 4.7106, 4.8918, 4.9716, 6.5
+018, 7.0740, 7.2158)[] 
+ []
+
+
+Overfull \hbox (63.24669pt too wide) in paragraph at lines 216--216
+ []\OT1/cmtt/m/n/10 # The following outputs the values of the likelihood and th
+eta and yields[] 
  []
 
 
@@ -431,48 +445,48 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 229--230
+Underfull \hbox (badness 10000) in paragraph at lines 245--246
 
  []
 
 
-Overfull \hbox (158.74605pt too wide) in paragraph at lines 231--231
+Overfull \hbox (158.74605pt too wide) in paragraph at lines 247--247
  []\OT1/cmtt/m/n/10 y <- c(1.1, 2.6, 3.0, 3.7, 4.1, 6.5, 8.1, 9.1, 9.2, 11.7, 1
 3.8, 14.3, 17.8, 19.3, 19.7,[] 
  []
 
 
-Overfull \hbox (137.74623pt too wide) in paragraph at lines 232--232
+Overfull \hbox (137.74623pt too wide) in paragraph at lines 248--248
  []\OT1/cmtt/m/n/10 22.7, 22.9, 23.4, 23.9, 24.9, 26.9, 27.4, 27.5, 28.7, 31.4,
  35.9, 41.7, 42.5, 43.1,[] 
  []
 
 
-Overfull \hbox (137.74623pt too wide) in paragraph at lines 233--233
+Overfull \hbox (137.74623pt too wide) in paragraph at lines 249--249
  []\OT1/cmtt/m/n/10 45.4, 46.2, 48.3, 54.2, 54.4, 54.8, 60.7, 61.0, 70.0, 70.1,
  70.2, 75.4, 75.4, 75.7,[] 
  []
 
 
-Overfull \hbox (132.49628pt too wide) in paragraph at lines 234--234
+Overfull \hbox (132.49628pt too wide) in paragraph at lines 250--250
  []\OT1/cmtt/m/n/10 76.6, 76.9, 76.9, 78.7, 80.6, 83.6, 85.7, 86.0, 87.4, 90.0,
  93.4,94.3, 96.7, 96.8,[] 
  []
 
 
-Overfull \hbox (137.74623pt too wide) in paragraph at lines 235--235
+Overfull \hbox (137.74623pt too wide) in paragraph at lines 251--251
  []\OT1/cmtt/m/n/10 100.1, 105.4, 105.9, 110.9, 112.8, 113.3, 114.3, 114.9, 119
 .4, 119.5, 120.6, 121.0,[] 
  []
 
 
-Overfull \hbox (137.74623pt too wide) in paragraph at lines 236--236
+Overfull \hbox (137.74623pt too wide) in paragraph at lines 252--252
  []\OT1/cmtt/m/n/10 127.7, 129.5, 129.8, 133.3, 133.6, 136.0, 137.5, 137.6, 138
 .5, 140.1, 158.4, 158.7,[] 
  []
 
 
-Overfull \hbox (137.74623pt too wide) in paragraph at lines 237--237
+Overfull \hbox (137.74623pt too wide) in paragraph at lines 253--253
  []\OT1/cmtt/m/n/10 165.9, 166.0, 166.9, 169.2, 174.4, 183.7, 188.0, 227.9, 248
 .0, 257.6, 271.4, 280.9,[] 
  []
@@ -486,17 +500,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 274--275
+Underfull \hbox (badness 10000) in paragraph at lines 290--291
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 275--276
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 297--298
+Underfull \hbox (badness 10000) in paragraph at lines 291--292
 
  []
 
@@ -509,13 +518,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
 
 [7]
-Overfull \hbox (220.74532pt too wide) in paragraph at lines 313--313
+Underfull \hbox (badness 10000) in paragraph at lines 313--314
+
+ []
+
+
+Overfull \hbox (220.74532pt too wide) in paragraph at lines 329--329
  []  \OT1/cmtt/m/n/10 LRS = RS[249] #handout was wrong, wasn't doing 0 indexing
 .... too lazy to fix it in my previous work.[] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 329--331
+Underfull \hbox (badness 10000) in paragraph at lines 345--347
 
  []
 
@@ -528,7 +542,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 364--366
+Underfull \hbox (badness 10000) in paragraph at lines 380--382
 
  []
 
@@ -541,12 +555,113 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 400--401
+Underfull \hbox (badness 10000) in paragraph at lines 416--417
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--407
+Underfull \hbox (badness 10000) in paragraph at lines 422--423
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 425--427
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 432--433
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 435--437
+
+ []
+
+
+Overfull \hbox (135.04501pt too wide) detected at line 440
+[]
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.43335pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.43335pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 441--442
+
+ []
+
+
+Overfull \hbox (174.49591pt too wide) in paragraph at lines 443--443
+ []\OT1/cmtt/m/n/10 y <- c(10.75, 10.87, 10.92, 11.23, 11.26, 11.30, 11.31, 11.
+32, 11.39, 11.41, 11.52, 11.55,[] 
+ []
+
+
+Overfull \hbox (137.74623pt too wide) in paragraph at lines 444--444
+ []\OT1/cmtt/m/n/10 11.58, 11.62, 11.62, 11.73, 11.77, 11.80, 11.88, 11.90, 11.
+93, 12.02, 12.10, 12.27)[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 462--463
+
+ []
+
+
+Overfull \hbox (162.99582pt too wide) in paragraph at lines 464--464
+ []  \OT1/cmtt/m/n/10 y <- c(10.75, 10.87, 10.92, 11.23, 11.26, 11.30, 11.31, 1
+1.32, 11.39, 11.41, 11.52, 11.55,[] 
+ []
+
+
+Overfull \hbox (115.74623pt too wide) in paragraph at lines 465--465
+ []\OT1/cmtt/m/n/10 11.58, 11.62, 11.62, 11.73, 11.77, 11.80, 11.88, 11.90, 11.
+93, 12.02, 12.10, 12.27)[] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.43335pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.43335pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
+
+[11]
+Overfull \hbox (63.24669pt too wide) in paragraph at lines 485--485
+ []\OT1/cmtt/m/n/10 # The following outputs the values of the likelihood and th
+eta and yields[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 494--495
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 498--499
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 511--512
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 516--517
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 520--521
 
  []
 
@@ -558,7 +673,169 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
 
-[10] (./hw6.aux)
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 523--525
+
+ []
+
+
+Overfull \hbox (5.4972pt too wide) in paragraph at lines 528--528
+ []    \OT1/cmtt/m/n/10 return _lambda**k * math.e**(-_lambda) / math.factorial
+(k)[] 
+ []
+
+
+Overfull \hbox (9.88982pt too wide) in paragraph at lines 559--560
+\OT1/cmr/m/n/10 which yielded [3.7318574019243775, 34.71073099633768, 66.277241
+84984828,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 560--561
+
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.43335pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.43335pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
+
+[13]
+Overfull \hbox (31.74696pt too wide) in paragraph at lines 566--566
+ []    \OT1/cmtt/m/n/10 q += (observed[i] - expected_values[i])**2 / expected_v
+alues[i][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 570--571
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 581--582
+
+ []
+
+
+Overfull \hbox (147.24596pt too wide) in paragraph at lines 583--583
+ []\OT1/cmtt/m/n/10 x <- c(5.8, 10.1, 12.0, 12.5, 16.0, 18.6, 18.9, 19.0, 19.2,
+ 19.6, 21.5, 22.3, 23.2, 23.3,[] 
+ []
+
+
+Overfull \hbox (115.74623pt too wide) in paragraph at lines 584--584
+ []\OT1/cmtt/m/n/10 23.7, 24.3, 24.8, 25.2, 25.5, 25.9, 26.2, 26.3, 26.7, 26.8,
+ 27.0, 27.1, 27.1, 27.1,[] 
+ []
+
+
+Overfull \hbox (115.74623pt too wide) in paragraph at lines 585--585
+ []\OT1/cmtt/m/n/10 27.2, 28.1, 28.1, 28.3, 28.4, 28.4, 28.6, 28.7, 29.5, 29.6,
+ 29.7, 30.0, 30.2, 30.2,[] 
+ []
+
+
+Overfull \hbox (115.74623pt too wide) in paragraph at lines 586--586
+ []\OT1/cmtt/m/n/10 30.6, 30.8, 31.2, 31.5, 31.6, 31.8, 32.3, 32.4, 32.8, 33.1,
+ 34.4, 34.6, 35.5, 36.6,[] 
+ []
+
+
+Overfull \hbox (5.4972pt too wide) in paragraph at lines 593--593
+ []\OT1/cmtt/m/n/10 lower = p_hat - 1.96 * sqrt(p_hat * (1 - p_hat)) / sqrt(n_h
+at)[] 
+ []
+
+
+Overfull \hbox (5.4972pt too wide) in paragraph at lines 594--594
+ []\OT1/cmtt/m/n/10 upper = p_hat + 1.96 * sqrt(p_hat * (1 - p_hat)) / sqrt(n_h
+at)[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 599--600
+
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.43335pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.43335pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
+
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 617--618
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 618--619
+
+ []
+
+
+Overfull \hbox (63.24669pt too wide) in paragraph at lines 638--638
+ []\OT1/cmtt/m/n/10 # The following outputs the values of the likelihood and th
+eta and yields[] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.43335pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.43335pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 664--665
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 665--666
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 666--667
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 667--668
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 668--669
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 669--670
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 670--671
+
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.43335pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.43335pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.43335pt}.
+
+[16] (./hw6.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -567,11 +844,11 @@ L3 programming layer <2024-01-22>
 Here is how much of TeX's memory you used:
  6197 strings out of 474222
  102134 string characters out of 5748733
- 1934975 words of memory out of 5000000
+ 1938975 words of memory out of 5000000
  28421 multiletter control sequences out of 15000+600000
  563005 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 79i,11n,93p,316b,627s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 79i,12n,93p,375b,627s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
@@ -585,10 +862,10 @@ cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on hw6.pdf (10 pages, 173834 bytes).
+Output written on hw6.pdf (16 pages, 186248 bytes).
 PDF statistics:
- 114 PDF objects out of 1000 (max. 8388607)
- 71 compressed objects within 1 object stream
+ 133 PDF objects out of 1000 (max. 8388607)
+ 84 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
