@@ -197,6 +197,70 @@ p = G(5, 20, .5) = .021
 \]
 where G is the cdf of the binomial distribution with $p = .5$, $n = 20$, and $x = 5$. \\
 .021 < .05, so we reject the null hypothesis. \\
-\item 
+\item Following the procedure in handout 12, we find that $W_+ = 68.5$ and $W_- = 141.5$. \\
+We find from psignrank(68.5, 20, TRUE) that $p = 0.09467411 < .05$ so we reject the null hypothesis. 
+\item We can invert the wilcox test to find an upper bound. We need to find the first value where we would reject the null hypothesis if it were the sample median. We will do a binary search: \\
+Trying $H_0 = 10.07$: \\
+$W_+ = 100, W_- = 90$ \\
+psignrank(100, 20, TRUE)  = 0.4347439 > .1, so fail to reject. \\
+Trying $H_0 = 10.93$: \\
+$W_+ = 20, W_- = 170$ \\
+psignrank(20, 20, TRUE) = 0.0003538132, so reject. \\
+Trying $H_0 = 10.15$: \\
+$W_+ = 79.5$ \\
+psignrank(79.5, 20, TRUE) = 0.1841383 > .1 so fail to reject. \\
+Trying $H_0 = 10.24$: \\
+$W_+ = 78$ \\
+psignrank(78, 20, TRUE) = 0.1649914 > .1 so fail to reject. \\
+So the 90\% upper bound is 10.24. 
+\end{enumerate}
+\section*{Problem 5}
+\begin{enumerate}
+\item idk, just use wald CI I guess: \\
+\begin{align*}
+CI &= \hat{p} \pm Z_{.025}\frac{\sqrt{\hat{p}(1 - \hat{p})}}{\sqrt{n}} \\
+&= .65 \pm 1.96 \frac{\sqrt{.65(1 - .65)}}{\sqrt{200}} \\
+&= 0.583895385940163, 0.716104614059837
+\end{align*}
+\item we have the test statistic: \\
+\begin{align*}
+TS &= \frac{.65 - .6}{\sqrt{\frac{.65 \cdot .35}{200}}} \\
+&= 1.4824986333222026
+\end{align*}
+the p value is: \\
+\[
+p = 1 - pnorm(1.48) = 0.06943662
+\]
+greater than $\alpha$ so fail to reject. \\
+\item so we have the power function: \\
+\[
+power = 1 - pnorm(Z_\alpha \cdot \sqrt{\frac{p_o(1 - p_o)}{p_1(1 - p_1)} + \frac{\sqrt{n}(p_o - p_1)}{\sqrt{p_1(1 - p_1)}}})
+\]
+This is the power function implemented in R: \\
+\begin{verbatim}
+power_from_formula <- function(n, p0, p1, alpha = 0.05) {
+z_alpha <- qnorm(1 - alpha)
+inside_sqrt <- 
+  p0*(1 - p0) / (p1*(1 - p1)) +
+  ( sqrt(n) * (p0 - p1) ) / sqrt(p1*(1 - p1))
+1 - pnorm( z_alpha * sqrt(inside_sqrt) )
+}
+\end{verbatim}
+When plugging in our values, we get: \\
+0.001178664 \\
+0.05 \\
+0.4180287 \\
+0.9078522 \\
+0.9988094 \\
+for .55, .6, .65, .7, .75 respectively. \\
+\end{enumerate}
+section*{Problem 6}
+\begin{enumerate}
+\item b \\
+\item c \\
+\item d \\
+\item a \\
+\item b \\
+\item c \\
 \end{enumerate}
 \end{document}
