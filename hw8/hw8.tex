@@ -54,4 +54,37 @@
 \item independent samples
 \end{enumerate}
 \section*{Problem 2}
+First we will apply the two sample t-test to this problem: \\
+we have $n = m = 15$. The average before is 120.8667 and the average after is 110.8. let $\bar{X} = \mbox{sample mean before}$ and $\bar{Y} = \mbox{sample mean after}$. Let $\hat{\theta} = \bar{Y} - \bar{X}$ and $\theta = \mu_Y - \mu_X$. \\
+Our null hypothesis is $\theta \geq 0$ and our alternative hypothesis is $\theta < 0$. \\
+The pooled standard deviation is: \\
+\begin{align*}
+s_p &= \sqrt{\frac{(n-1)s_1^2 + (m - 1)s_2^2}{n + m - 2}} \\
+&= \sqrt{\frac{(14)4.240395^2 + (14)5.427443^2}{28}} \\
+&= 4.8702200809755
+\end{align*}
+We then have our test statistic: \\
+\begin{align*}
+T &= \frac{\hat{theta} - \theta_0}{\sqrt{\frac{s^2}{n} + \frac{s^2}{m}}} \\
+&= \frac{-10.067 - 0}{\sqrt{\frac{4.87^2}{15} + \frac{4.87^2}{15}}} \\
+&= -5.6611
+\end{align*}
+our degrees of freedom is $15 + 15 - 2 = 28$, so from the table we get that the: \\
+\[
+P(T < T_obs) = tcdf(-5.6611, 28) \approx 2.29 \cdot 10^{-6}
+\]
+this p value is much less than $\alpha = .05$, so we reject the null hypothesis. \\
+Using the wilcoxon rank sum test, we will let $W_1 = \mbox{sum of before ranks}$ and $W_2 = \mbox{sum of after ranks}$. \\
+We get $W_1 = 516$ and $W_2 = 216$. So our p value is: \\
+\[
+p = G(W_1) = pwilcox(w_1 - n(n+1) / 2, n, m) = 0.004937411
+\]
+Again the p-value is much less than $\alpha = .05$ so we reject the null hypothesis. \\
+For a paired t-test to be used, we must have: 
+\begin{enumerate}
+\item $D$ is normally distributed where $D_i = X_i - Y_i$: using the shapiro wilkes test we get a p value of 0.5105, suggesting that indeed $D$ is normally distributed. \\
+\item $D_i$s are independent: this depends on how exactly the study was carried out, but it would seem that one patient's blood sugar results would not impact another patient's blood sugar results, so I think it is safe to assume that this condition holds. 
+\end{enumerate}
+given the above, it would seem that the paired t-test is suitable for this problem. \\
+
 \end{document}
