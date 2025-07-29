@@ -86,5 +86,34 @@ For a paired t-test to be used, we must have:
 \item $D_i$s are independent: this depends on how exactly the study was carried out, but it would seem that one patient's blood sugar results would not impact another patient's blood sugar results, so I think it is safe to assume that this condition holds. 
 \end{enumerate}
 given the above, it would seem that the paired t-test is suitable for this problem. \\
+\section*{Problem 3}
+\begin{enumerate}
+\item We have the null hypothesis: \\
+\[
+H_o: p_1 - p_2 = 0
+\]
+where $p_1$ is the proportion of population 1 which has the trait, and $p_2$ is the proportion of population 2 which has the trait. We have the alternative hypothesis: \\
+\[
+H_A: p_1 - p_2 \neq 0
+\]
+\item We have the test statistic: \\
+\begin{align*}
+Z &= \frac{\hat{p_1} - \hat{p_2}}{\sqrt{\hat{p}(1 - \hat{p})(\frac{1}{n_1} + \frac{1}{n_2})}} \\
+\end{align*}
+where: \\
+\[
+\hat{p} = \frac{n_1 \cdot \hat{p_1} + n_2 \cdot \hat{p_2}}{n_1 + n_2} = \frac{100 \cdot .4 + 100 \cdot .3}{200} = .35
+\]
+Plugging everything into our test statistic formula: \\
+\begin{align*}
+Z &= \frac{.4 - .3}{\sqrt{.35(1 - .35)(\frac{1}{100} + \frac{1}{100})}} \\
+&\approx 1.4825
+\end{align*}
+Thus we have the p value: \\
+\[
+P(\abs{Z} \geq \abs{Z_o}) = 2(1 - \Phi(\abs{Z_o})) = 2(1 - \Phi(1.4825)) = 2(1 - .9306) = .1388
+\]
+$.1388 > \alpha = .05$ so we fail to reject the null hypothesis. There is not significant evidence to suggest that the proportion of people with the trait differs between the two populations. \\
 
+\end{enumerate}
 \end{document}
