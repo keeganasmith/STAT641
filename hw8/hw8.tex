@@ -114,6 +114,35 @@ Thus we have the p value: \\
 P(\abs{Z} \geq \abs{Z_o}) = 2(1 - \Phi(\abs{Z_o})) = 2(1 - \Phi(1.4825)) = 2(1 - .9306) = .1388
 \]
 $.1388 > \alpha = .05$ so we fail to reject the null hypothesis. There is not significant evidence to suggest that the proportion of people with the trait differs between the two populations. \\
-
 \end{enumerate}
+\section*{Problem 4}
+\begin{enumerate}
+\item we want to test whether or not the training program had an overall effect on productivity. To check this we need to ask whether or not the proportion of productive people who were hindered by this is different than the proportion of unproductive people that were helped by this. So in other words, we have the null hypothesis: \\
+\[
+H_0: p_{1,2} = p_k{2,1}
+\]
+and the alternative hypothesis: \\
+\[
+H_A: p_{1,2} \neq p_k{2,1}
+\]
+\item This data is paired (the same participant is giving a response before and after the training program) so we can either use an exact binomial test, or McNemar's test. We will use exact binomial since the sample size is quite small $m = 13 < 30$: \\
+\begin{align*}
+z &= \frac{n_{1,2} - n_{2,1}}{\sqrt{n_{1,2} + n_{2,1}}} \\
+&= \frac{9 - 4}{\sqrt{9 + 4}} \\
+&= 1.3868
+\end{align*}
+so we get a p value of: \\
+\begin{align*}
+p &= 2 \cdot (1 - \Phi(z)) \\
+&= 2 \cdot (1 - .9177) \\
+&= 0.1646
+\end{align*}
+the p-value is greater than .05, so we fail to reject the null hypothesis that the program impacts employee performance.
+\end{enumerate}
+\section*{Problem 5}
+For this problem, we should use multiple comparisons of t proportions since we are testing specific ratios, not simply testing whether or not the proportions are the same. \\
+Our null hypothesis is: \\
+\[
+H_0: 
+\]
 \end{document}
