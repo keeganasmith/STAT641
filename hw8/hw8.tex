@@ -8,7 +8,7 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{verbatim}
-
+\usepackage{physics}
 % Define macros for title and author
 \newcommand{\thetitle}{STAT 641 \\ Homework 7}
 \newcommand{\theauthor}{Keegan Smith}
@@ -158,5 +158,44 @@ So we have the p value: \\
 \[
 p = 1 - pchisq(2.5367, 3) = 0.4687
 \]
-This value is much greater than $\alpha = .01$, so we fail to reject the null hypothesis that the flowers follow the distribution 9:3:3:1. 
+This value is much greater than $\alpha = .01$, so we fail to reject the null hypothesis that the flowers follow the distribution 9:3:3:1. \\
+\section*{Problem 6}
+We are testing for independence and the sample size is quite large (none of the observed values is less than 5) so we can use a pearson chi squared test for independence: \\
+First we will compute all of the estimated expected values: \\
+\[
+E_{1, 1} = \frac{120 \cdot 170}{300} = 68
+\]
+\[
+E_{1, 2} = \frac{120 \cdot 130}{300} = 52
+\]
+\[
+E_{2, 1} = \frac{120 \cdot 170}{300} = 68
+\]
+\[
+E_{2, 2} = \frac{120 \cdot 130}{300} = 52
+\]
+\[
+E_{3, 1} = \frac{60 \cdot 170}{300} = 34
+\]
+\[
+E_{3,2} = \frac{60 \cdot 130}{300} = 26
+\]
+We then have the test statistic: \\
+\begin{align*}
+T &= \frac{(68 - 50)^2}{68} + \frac{(52 - 70)^2}{52} + \frac{(68 - 80)^2}{68} + \frac{(52 - 40)^2}{52} + \frac{(34 - 40)^2}{34} + \frac{(26 - 20)^2}{26} \\
+&= 4.7647 + 6.2307 + 2.1176 + 2.7692 + 1.0588 + 1.3846 \\
+&= 18.3256
+\end{align*}
+the test statistic is a chi square distribution with $(r - 1)(c - 1) = 2 \cdot 1 = 2$ degrees of freedom, so we have the p value: \\
+\[
+p = 1 - pchisq(18.3256, 2) = 0.0001048689
+\]
+The p value is much less than .05, so we reject the null hypothesis that education level and preference type are independent. \\
+\section*{Problem 7}
+\begin{enumerate}
+\item A \\
+\item B \\
+\item B \\
+\item B 
+\end{enumerate}
 \end{document}
