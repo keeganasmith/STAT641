@@ -125,7 +125,7 @@ and the alternative hypothesis: \\
 \[
 H_A: p_{1,2} \neq p_k{2,1}
 \]
-\item This data is paired (the same participant is giving a response before and after the training program) so we can either use an exact binomial test, or McNemar's test. We will use exact binomial since the sample size is quite small $m = 13 < 30$: \\
+\item This data is paired (the same participant is giving a response before and after the training program) so we can either use an exact binomial test, or McNemar's test. We will use exact binomial since the sample size is quite small $m = 13 < 30$. $m > 10$ so we can still use a normal approximation for the exact binomial test: \\
 \begin{align*}
 z &= \frac{n_{1,2} - n_{2,1}}{\sqrt{n_{1,2} + n_{2,1}}} \\
 &= \frac{9 - 4}{\sqrt{9 + 4}} \\
@@ -140,9 +140,23 @@ p &= 2 \cdot (1 - \Phi(z)) \\
 the p-value is greater than .05, so we fail to reject the null hypothesis that the program impacts employee performance.
 \end{enumerate}
 \section*{Problem 5}
-For this problem, we should use multiple comparisons of t proportions since we are testing specific ratios, not simply testing whether or not the proportions are the same. \\
-Our null hypothesis is: \\
+For this problem it seems that we can't use any of the methods outlined in handout 13. We are not testing whether or not each of these proportions are equivalent to one another, but rather testing whether or not the proportion of flowers follows a particular distribution, thus it would be best if we used a goodness of fit test. \\
+We can simply use chisquare GOF as outlined in handout 9 where: \\
 \[
-H_0: 
+E = [\frac{9}{16} \cdot 700, \frac{3}{16} \cdot 700, \frac{3}{16} \cdot 700, \frac{1}{16} \cdot 700] = [393.75, 131.25, 131.25, 43.75]
 \]
+\[
+O = [414, 126, 120, 40]
+\]
+so we have: \\
+\begin{align*}
+Q &= \frac{(393.75 - 414)^2}{393.75} + \frac{(131.25- 126)^2}{131.25} + \frac{(131.25- 120)^2}{131.25} + \frac{(43.75- 40)^2}{43.75} \\
+&= 1.041 + .21 + 0.9643 + 0.3214 \\
+&= 2.5367
+\end{align*}
+So we have the p value: \\
+\[
+p = 1 - pchisq(2.5367, 3) = 0.4687
+\]
+This value is much greater than $\alpha = .01$, so we fail to reject the null hypothesis that the flowers follow the distribution 9:3:3:1. 
 \end{document}
